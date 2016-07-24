@@ -2,9 +2,9 @@
   "name": "HackerNews",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "scrape.js",
   "scripts": {
-    "start": "node scrape"
+    "start": "node scrape.js"
   },
   "keywords": [],
   "author": "",
