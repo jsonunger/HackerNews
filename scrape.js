@@ -57,12 +57,12 @@ new CronJob('00 30 11 * * *', function () {
   });
 }, null, true, 'America/New_York');
 
-app.set('port', process.env.PORT || 1337);
+app.set('port', process.env.PORT || 8080);
 
 app.get('/', (req, res) => {
   res.send('App is running');
 });
 
-app.listen(function () {
+app.listen(app.get('port'), function () {
   console.log('App is running');
 });
