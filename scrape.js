@@ -16,6 +16,10 @@ let transporter = nodemailer.createTransport(require('nodemailer-mailgun-transpo
 
 app.get('/scrape', (req, res) => {
 
+
+});
+
+new CronJob('00 19 23 * * *', function () {
   request('https://news.ycombinator.com', (err, response, html) => {
     if (!err && response.statusCode === 200) {
       let $ = cheerio.load(html);
@@ -56,13 +60,14 @@ app.get('/scrape', (req, res) => {
       })
     }
   });
-});
-
-new CronJob('00 06 23 * * *', function () {
-  request.get('peaceful-headland-63765.herokuapp.com/scrape');
 }, null, true, 'America/New_York');
 
-app.listen('8081', function () {
-  console.log('Listening on port 8081');
-})
+app.set('port', process.env.PORT || 1337);
 
+app.get('/', (req, res) => {
+  res.send('App is running');
+});
+
+app.listen(function () {
+  console.log('App is running');
+});
