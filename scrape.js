@@ -58,7 +58,7 @@ app.get('/scrape', (req, res) => {
   });
 });
 
-new CronJob('00 58 22 * * *', function () {
+new CronJob('00 02 23 * * *', function () {
   request.get('peaceful-headland-63765.herokuapp.com/scrape');
 }, null, true, 'America/New_York');
 
