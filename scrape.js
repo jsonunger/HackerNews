@@ -3,7 +3,6 @@
 const request = require('request');
 const cheerio = require('cheerio');
 const nodemailer = require('nodemailer');
-const config = require('./config.json');
 const CronJob = require('cron').CronJob;
 
 const app = require('express')();
@@ -11,8 +10,8 @@ const app = require('express')();
 
 let transporter = nodemailer.createTransport(require('nodemailer-mailgun-transport')({
   auth: {
-    api_key: config.api_key,
-    domain: config.domain
+    api_key: process.env.api_key,
+    domain: process.env.domain
   }
 }));
 
@@ -21,7 +20,7 @@ app.get('/scrape', (req, res) => {
 
 });
 
-new CronJob('00 21 23 * * *', function () {
+new CronJob('00 27 23 * * *', function () {
   request('https://news.ycombinator.com', (err, response, html) => {
     if (!err && response.statusCode === 200) {
       let $ = cheerio.load(html);
