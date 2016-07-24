@@ -14,7 +14,7 @@ let transporter = nodemailer.createTransport(require('nodemailer-mailgun-transpo
   }
 }));
 
-new CronJob('00 31 23 * * *', function () {
+new CronJob('00 30 11 * * *', function () {
   request('https://news.ycombinator.com', (err, response, html) => {
     if (!err && response.statusCode === 200) {
       let $ = cheerio.load(html);
