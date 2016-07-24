@@ -14,7 +14,7 @@ let transporter = nodemailer.createTransport(require('nodemailer-mailgun-transpo
   }
 }));
 
-app.get('/', (req, res) => {
+app.get('/scrape', (req, res) => {
 
   request('https://news.ycombinator.com', (err, response, html) => {
     if (!err && response.statusCode === 200) {
@@ -58,8 +58,8 @@ app.get('/', (req, res) => {
   });
 });
 
-new CronJob('00 50 22 * * *', function () {
-  request.get('localhost:8081/');
+new CronJob('00 58 22 * * *', function () {
+  request.get('peaceful-headland-63765.herokuapp.com/scrape');
 }, null, true, 'America/New_York');
 
 app.listen('8081', function () {
