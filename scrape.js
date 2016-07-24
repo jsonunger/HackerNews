@@ -21,7 +21,7 @@ app.get('/scrape', (req, res) => {
 
 });
 
-new CronJob('00 19 23 * * *', function () {
+new CronJob('00 21 23 * * *', function () {
   request('https://news.ycombinator.com', (err, response, html) => {
     if (!err && response.statusCode === 200) {
       let $ = cheerio.load(html);
@@ -54,11 +54,11 @@ new CronJob('00 19 23 * * *', function () {
         to: 'jasonscottunger@gmail.com',
         subject: 'The Top Hacker News Right Now',
         html: emailHTML
-      }, (error, { message }) => {
+      }, (error, info) => {
         if (error) {
           return console.error(`Error: ${ error }`);
         }
-        console.log(`Message Sent: "${ message }"`);
+        console.log(`Message Sent: "${ info.message }"`);
       })
     }
   });
