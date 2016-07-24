@@ -4,7 +4,6 @@ const request = require('request');
 const cheerio = require('cheerio');
 const nodemailer = require('nodemailer');
 const CronJob = require('cron').CronJob;
-
 const app = require('express')();
 
 
@@ -15,12 +14,7 @@ let transporter = nodemailer.createTransport(require('nodemailer-mailgun-transpo
   }
 }));
 
-app.get('/scrape', (req, res) => {
-
-
-});
-
-new CronJob('00 27 23 * * *', function () {
+new CronJob('00 31 23 * * *', function () {
   request('https://news.ycombinator.com', (err, response, html) => {
     if (!err && response.statusCode === 200) {
       let $ = cheerio.load(html);
